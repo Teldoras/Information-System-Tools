@@ -1,0 +1,140 @@
+Задание 1:
+
+use my_db
+
+show tables;
+
+describe user_private_message;
+
+
+Задание 2:
+
+show tables;
+
+describe discussion group;
+
+select name Name, approve_required Approve from discussion_group where approve_required;
+
+
+Задание 3:
+
+show tables;
+
+describe user_private_essage;
+
+select greatest (message_id, user_from_id, user_to_id) "ID", read_time "READ", send_time "SEND", concat(substring(message_text, 1, 30),'...') "TEXT" from user_private_message where send_time between '2020-11-01' and '2020-11-30' and message_text like "A%" and (DATE(read_time) - DATE(send_time)) <= 10;
+
+
+Задание 4:
+
+show tables;
+
+describe users_to_discussion_groups;
+
+select sum(approved) "approves_cnt", min(joined_time) "oldest_join", max(approved_time) "recent_approve" from users_to_discussion_groups;
+
+
+Задание 5:
+
+describe user;
+
+select user_id "ID", registration_time "TIME" from user order by registration_time desc limit 20;
+
+
+Задание 6:
+
+show tables;
+
+describe discussion_group;
+
+with groups_with_approve as (select * from discussion_group where approve_required = 1), new_groups as (select * from groups_with_approve where date(creation_time) >= '2020-01-01') select * from new_groups;
+
+
+Задание 7:
+
+show tables;
+
+describe discussion_group;
+
+describe user_private_message;
+
+select admin_user_id "ID" from discussion_group 
+union
+select user_from_id "ID" from user_private_message;
+
+
+Задание 8:
+
+describe user_private_message;
+
+select date(send_time) "date", count(1) as sum_cnt, count(distinct user_from_id) as cnt_sum
+from user_private_message 
+group by date(send_time) having sum_cnt = cnt_sum;
+
+
+Задание 9:
+
+docker exec -it my-mongo mongo
+
+show dbs
+
+use my_db
+
+show collections
+
+Результат:
+
+posts
+users
+
+
+Задание 10:
+
+db.posts.find({"topics" : "as", "author" : /.*example.ru.*/, "score" : {$gt: 100}})
+
+
+Задание 11:
+
+db.posts.insertMany([{"creation_date" : Date(), "author" : "skbx@example.com", "topics" : ["mongodb"]}, {"creation_date" : ISODate('2021-12-31') , "author" : "skbx@example.com"}])
+
+
+Задание 12:
+
+db.users.aggregate([{$match : {"visits" : {$gt: 300}}}, {$project: {karma: "$karma", name: {$substr : ["$first_name", 0, 1]}}}, {$group: {_id : "$name", sum_karma: {$sum: "$karma"}}}])
+
+
+Задание 13:
+
+set index "index precalculated content"
+
+exists index
+
+ttl index
+
+set index "index precalculated content" ex 120
+
+persist index
+
+
+Задание 14:
+
+zadd ratings 10 mysql
+
+zadd ratings 20 postgresql
+
+zadd ratings 30 mongodb
+
+zadd ratings 40 redis
+
+zincrby ratings 15 mysql
+
+zpopmax ratings
+
+zrank ratings mysql
+
+
+Задание 15:
+
+psubscribe events*
+
+publish events42 "Hello there"
