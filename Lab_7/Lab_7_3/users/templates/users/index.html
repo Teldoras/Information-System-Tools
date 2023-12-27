@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django + MySQL: index</title>
+</head>
+<body>
+<h1>Users: index</h1>
+<p>
+
+<form action="" method="post">
+    <fieldset id="choice_box">
+        <legend>Choose search type:</legend>
+        {% csrf_token %}
+        {{ form_1 }}
+        <!--
+        <div>
+            <input type="radio" name="filters" id="name">
+            <label for="name">Name</label>
+        </div>
+        <div>
+            <input type="radio" name="filters" id="date">
+            <label for="date">Date</label>
+        </div>
+        -->
+        <input type="submit" value="Continue">
+    </fieldset>
+</form>
+
+</body>
+</html>
