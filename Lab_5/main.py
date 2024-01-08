@@ -23,7 +23,7 @@ def check_str(first_str):
 def find_min():
     new_string = ''
     string_list = []
-    max_list = []
+    min_list = []
     i = 0
     while new_string != 'end':
         new_string = input('Введите числа или "end"')
@@ -32,13 +32,13 @@ def find_min():
     for i in range(0, len(string_list) - 1):
         temp_string = string_list[i]
         string_list[i] = temp_string.split()
-        local_max = int(string_list[i][0])
+        local_min = int(string_list[i][0])
         for j in range(0, len(string_list[i])):
-            if int(string_list[i][j]) > local_max:
-                local_max = int(string_list[i][j])
-        max_list.append(local_max)
-    for i in range(0, len(max_list)):
-        print(max_list[i])
+            if int(string_list[i][j]) < local_min:
+                local_min = int(string_list[i][j])
+        min_list.append(local_min)
+    for i in range(0, len(min_list)):
+        print(min_list[i])
     print('end.')
     new_num = int(input('Укажите номер задачи:'))
     choose_ex()

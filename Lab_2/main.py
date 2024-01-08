@@ -85,7 +85,7 @@ def print_even(last_num):
     while i <= last_num:
         if i % 2 == 0:
             print(i, end=' ')
-            i += 1
+        i += 1
 
 
 # Задача 10
